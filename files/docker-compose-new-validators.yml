@@ -1,0 +1,86 @@
+version: '3.8'
+
+networks:
+  bsc_network:
+    name: bsc-network
+# networks:
+#   bsc_network:
+#     driver: bridge
+
+services:
+  node8:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node8
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node8:/root/bsc-node
+      - ./entry-point-new-node.sh:/root/entry-point.sh
+      # - /home/harjot/RVA/bsc-chain/nodes/bsc-node8/password.txt:/root/bsc-node/password.txt
+
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30313
+      - HTTP_PORT=8553
+    ports:
+      - "8553:8553"
+      - "30313:30313"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    networks:
+      - bsc_network
+
+  node9:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node9
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node9:/root/bsc-node
+      - ./entry-point-new-node.sh:/root/entry-point.sh
+      # - /home/harjot/RVA/bsc-chain/nodes/bsc-node9/password.txt:/root/bsc-node/password.txt
+
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30314
+      - HTTP_PORT=8554
+    ports:
+      - "8554:8554"
+      - "30314:30314"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    networks:
+      - bsc_network
+
+  node10:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node10
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node10:/root/bsc-node
+      - ./entry-point-new-node.sh:/root/entry-point.sh
+      # - /home/harjot/RVA/bsc-chain/nodes/bsc-node10/password.txt:/root/bsc-node/password.txt
+
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30315
+      - HTTP_PORT=8555
+    ports:
+      - "8555:8555"
+      - "30315:30315"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    networks:
+      - bsc_network
+
+  node11:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node11
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node11:/root/bsc-node
+      - ./entry-point-new-node.sh:/root/entry-point.sh
+      # - /home/harjot/RVA/bsc-chain/nodes/bsc-node11/password.txt:/root/bsc-node/password.txt
+
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30316
+      - HTTP_PORT=8556
+    ports:
+      - "8556:8556"
+      - "30316:30316"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    networks:
+      - bsc_network
+

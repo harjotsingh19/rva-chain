@@ -1,0 +1,164 @@
+version: '3.8'
+
+networks:
+  bsc_network:
+    name: bsc-network
+# networks:
+#   bsc_network:
+#     driver: bridge
+
+services:
+  node1:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node1
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node1:/root/bsc-node
+      - ./entry-point.sh:/root/entry-point.sh
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30306
+      - HTTP_PORT=8546
+    ports:
+      - "8546:8546"
+      - "30306:30306"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    # network_mode: "host"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:30306"]
+      interval: 30s
+      retries: 5
+    networks:
+      - bsc_network
+
+  node2:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node2
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node2:/root/bsc-node
+      - ./entry-point.sh:/root/entry-point.sh
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30307
+      - HTTP_PORT=8547
+    ports:
+      - "8547:8547"
+      - "30307:30307"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    # network_mode: "host"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:30307"]
+      interval: 30s
+      retries: 5
+    networks:
+      - bsc_network
+
+  node3:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node3
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node3:/root/bsc-node
+      - ./entry-point.sh:/root/entry-point.sh
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30308
+      - HTTP_PORT=8548
+    ports:
+      - "8548:8548"
+      - "30308:30308"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    # network_mode: "host"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:30308"]
+      interval: 30s
+      retries: 5
+    networks:
+      - bsc_network
+
+  node4:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node4
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node4:/root/bsc-node
+      - ./entry-point.sh:/root/entry-point.sh
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30309
+      - HTTP_PORT=8549
+    ports:
+      - "8549:8549"
+      - "30309:30309"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    # network_mode: "host"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:30309"]
+      interval: 30s
+      retries: 5
+    networks:
+      - bsc_network
+
+  node5:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node5
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node5:/root/bsc-node
+      - ./entry-point.sh:/root/entry-point.sh
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30310
+      - HTTP_PORT=8550
+    ports:
+      - "8550:8550"
+      - "30310:30310"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    # network_mode: "host"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:30310"]
+      interval: 30s
+      retries: 5
+    networks:
+      - bsc_network
+
+  node6:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node6
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node6:/root/bsc-node
+      - ./entry-point.sh:/root/entry-point.sh
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30311
+      - HTTP_PORT=8551
+    ports:
+      - "8551:8551"
+      - "30311:30311"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    # network_mode: "host"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:30311"]
+      interval: 30s
+      retries: 5
+    networks:
+      - bsc_network
+
+  node7:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-node7
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-node7:/root/bsc-node
+      - ./entry-point.sh:/root/entry-point.sh
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30312
+      - HTTP_PORT=8552
+    ports:
+      - "8552:8552"
+      - "30312:30312"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    # network_mode: "host"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:30312"]
+      interval: 30s
+      retries: 5
+    networks:
+      - bsc_network
+

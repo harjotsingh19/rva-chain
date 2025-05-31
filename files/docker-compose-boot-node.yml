@@ -1,0 +1,32 @@
+version: '3.8'
+
+networks:
+  bsc_network:
+    name: bsc-network
+# networks:
+#   bsc_network:
+#     driver: bridge
+
+services:
+  bsc-rpc:
+    image: hs60/bsc-chain:latest
+    container_name: bsc-rpc
+    volumes:
+      - /home/harjot/RVA/bsc-chain/nodes/bsc-rpc:/root/bsc-rpc
+      - ./bsc-rpc.sh:/root/bsc-rpc.sh
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30305
+      - HTTP_PORT=8545
+    ports:
+      - 8545:8545
+      - 30305:30305
+    entrypoint: [ "sh", "-c", "/root/bsc-rpc.sh" ]  
+    # network_mode: "host"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:30305"]
+      interval: 30s
+      retries: 5
+    networks:
+      - bsc_network
+
