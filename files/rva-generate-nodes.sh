@@ -24,9 +24,9 @@ BASE_BALANCE=$2
 for i in $(seq 1 $NUM_NODES); do
     echo "node $i"
 
-    NODE_ID="bsc-node$i"
+    NODE_ID="rva-node$i"
     mkdir -p ${workspace}/nodes/${NODE_ID}
-    mkdir -p ${workspace}/nodes/bsc-rpc/keystore
+    mkdir -p ${workspace}/nodes/rva-rpc/keystore
 
     # Generate unique password for each account (e.g., node1@rva, node2@rva)
     PASSWORD="node${i}@rva"
@@ -88,11 +88,11 @@ for i in $(seq 1 $NUM_NODES); do
 
     echo ${VOTE_ADDRESS} > ${workspace}/nodes/${NODE_ID}/vote_address.txt
     
-    BSC_CHAIN_ID=2200
+    RVA_CHAIN_ID=2200
     OPERATOR_ADDRESS=$validatorAddr
 
     # Run the command and capture the output
-    BLS_PROOF=$(./geth bls account generate-proof --datadir "$workspace/nodes/$NODE_ID" --blspassword "$BLS_PASSWORD_FILE" --chain-id "$BSC_CHAIN_ID" "$OPERATOR_ADDRESS" "$VOTE_ADDRESS")
+    BLS_PROOF=$(./geth bls account generate-proof --datadir "$workspace/nodes/$NODE_ID" --blspassword "$BLS_PASSWORD_FILE" --chain-id "$RVA_CHAIN_ID" "$OPERATOR_ADDRESS" "$VOTE_ADDRESS")
 
     # Extract the proof value (assuming it’s the last token in the output)
     proof_value=$(echo "$BLS_PROOF" | grep -oE '0x[a-fA-F0-9]+' | tail -n 1)
@@ -111,7 +111,7 @@ for i in $(seq 1 $NUM_NODES); do
 
     # Copy keystore files
     SOURCE_DIR="${workspace}/nodes/${NODE_ID}/keystore"
-    DEST_DIR="${workspace}/nodes/bsc-rpc/keystore/${validatorAddr}"
+    DEST_DIR="${workspace}/nodes/rva-rpc/keystore/${validatorAddr}"
 
     mkdir -p "$DEST_DIR"
 
