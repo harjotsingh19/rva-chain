@@ -1,6 +1,6 @@
 #!/bin/bash
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 output_file=${workspace}/files/docker-compose.yml
 
 
@@ -21,10 +21,10 @@ cat <<EOF > $output_file
 version: '3.8'
 
 networks:
-  bsc_network:
-    name: bsc-network
+  rva_network:
+    name: rva-network
 # networks:
-#   bsc_network:
+#   rva_network:
 #     driver: bridge
 
 services:
@@ -34,10 +34,10 @@ EOF
 for i in $(seq 1 $NUM_NODES)
 do
 
-  DATA_DIR="/root/bsc-node"
+  DATA_DIR="/root/rva-node"
   HTTP_PORT=8545
   NETWORK_PORT=30305
-  NODE_ID="bsc-node${i}"
+  NODE_ID="rva-node${i}"
 
   echo $((8545 + $i)) $((30305 + $i))
 
@@ -95,7 +95,7 @@ set +x
     cat <<EOF >> $output_file
   node${i}:
     image: hs60/bsc-chain:latest
-    container_name: bsc-node${i}
+    container_name: rva-node${i}
     volumes:
       - ${workspace}/nodes/${NODE_ID}:${DATA_DIR}
       - ./entry-point.sh:/root/entry-point.sh
@@ -113,7 +113,7 @@ set +x
       interval: 30s
       retries: 5
     networks:
-      - bsc_network
+      - rva_network
 EOF
 
     # Add a newline for separation
@@ -127,7 +127,7 @@ echo "Docker Compose file generated at $output_file."
 
 
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 
 exit
@@ -141,11 +141,11 @@ exit
 
 
 
-docker exec -it bsc-node1 /bin/bash
+docker exec -it rva-node1 /bin/bash
 
-cat /root/bsc-node/config.toml
+cat /root/rva-node/config.toml
 
-./geth attach /root/bsc-node/geth.ipc 
+./geth attach /root/rva-node/geth.ipc 
 
 admin.peers
 
@@ -157,11 +157,11 @@ echo
 
 
 
-docker exec -it bsc-node2 /bin/bash
+docker exec -it rva-node2 /bin/bash
 
-cat /root/bsc-node/config.toml
+cat /root/rva-node/config.toml
 
-./geth attach /root/bsc-node/geth.ipc 
+./geth attach /root/rva-node/geth.ipc 
 
 
 admin.peers
@@ -175,13 +175,13 @@ admin.addPeer("enode://6bf80f6f57fca9e15553a8bbb8588952d17e520f8c3fece63b15162f2
 
 
 
-docker restart bsc-node2
+docker restart rva-node2
 
-docker restart bsc-node1
+docker restart rva-node1
 
 
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 docker-compose -f $workspace/files/docker-compose.yml down
 

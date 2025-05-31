@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-workspace="$HOME/RVA/bsc-chain"
+workspace="$HOME/rva-chain"
 enodes_array=()
 
 # Define the number of nodes
@@ -10,7 +10,7 @@ NUM_NODES=$1
 echo "NUM_NODES: $NUM_NODES"
 
 # Read the bootnode key and generate its enode
-BOOT_NODEKEY_PATH="$workspace/nodes/bsc-rpc/geth/nodekey"
+BOOT_NODEKEY_PATH="$workspace/nodes/rva-rpc/geth/nodekey"
 if [[ ! -f "$BOOT_NODEKEY_PATH" ]]; then
     echo "Boot node key file not found!"
     exit 1
@@ -24,13 +24,11 @@ if [[ -z "$BOOT_NODE_ENODE" ]]; then
     exit 1
 fi
 
-BOOT_NODE_ENTRY="\"enode://$BOOT_NODE_ENODE@35.176.80.51:30305\""
-
-echo "BOOT_NODE_ENTRY :- $BOOT_NODE_ENTRY"
+BOOT_NODE_ENTRY="\"enode://$BOOT_NODE_ENODE@192.168.29.242:30305\""
 
 # Loop through node identifiers and create/start each node
 for i in $(seq 1 $NUM_NODES); do
-    NODE_ID="bsc-node${i}"
+    NODE_ID="rva-node${i}"
     DATA_DIR="$workspace/nodes/$NODE_ID"
 
     # Check if the nodekey exists
@@ -52,7 +50,7 @@ for i in $(seq 1 $NUM_NODES); do
         echo "Failed to extract enode ID from the node key for $NODE_ID."
     else
         PORT=$((30305 + i))
-        ENODE_REPLACED="\"enode://$ENODE@35.176.80.51:$PORT\""
+        ENODE_REPLACED="\"enode://$ENODE@rva-node${i}:$PORT\""
         enodes_array+=("$ENODE_REPLACED")
     fi
 done
@@ -65,19 +63,15 @@ echo "[$enodes_string]"
 
 # Loop through nodes to update config files
 for i in $(seq 1 $NUM_NODES); do
-    NODE_ID="bsc-node${i}"
+    NODE_ID="rva-node${i}"
     DATA_DIR="$workspace/nodes/$NODE_ID"
     INPUT_FILE="$DATA_DIR/config-old.toml"
     OUTPUT_FILE="$DATA_DIR/config.toml"
 
     echo "Updating StaticNodes and BootstrapNodes in $NODE_ID excluding its own entry"
 
-    PORT_ENTRY_NOT_TO_ADD=$((30305 + $i))
-
-    echo "PORT_ENTRY_NOT_TO_ADD $PORT_ENTRY_NOT_TO_ADD"
-
     # Exclude the current node's entry from StaticNodes
-    filtered_enodes=$(echo "$enodes_string" | sed "s/\"enode:\/\/[^\"]*@35.176.80.51:$PORT_ENTRY_NOT_TO_ADD\"//g")
+    filtered_enodes=$(echo "$enodes_string" | sed "s/\"enode:\/\/[^\"]*@rva-node${i}:[0-9]\+\"//g")
 
     # Remove redundant commas (e.g. ,, to ,)
     filtered_enodes=$(echo "$filtered_enodes" | sed 's/,,/,/g')

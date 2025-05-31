@@ -1,19 +1,19 @@
 version: '3.8'
 
 networks:
-  bsc_network:
-    name: bsc-network
+  rva_network:
+    name: rva-network
 # networks:
-#   bsc_network:
+#   rva_network:
 #     driver: bridge
 
 services:
-  bsc-rpc:
+  rva-rpc:
     image: hs60/bsc-chain:latest
-    container_name: bsc-rpc
+    container_name: rva-rpc
     volumes:
-      - /home/harjot/RVA/bsc-chain/nodes/bsc-rpc:/root/bsc-rpc
-      - ./bsc-rpc.sh:/root/bsc-rpc.sh
+      - /home/developer/rva-chain/nodes/rva-rpc:/root/rva-rpc
+      - ./rva-rpc.sh:/root/rva-rpc.sh
     working_dir: /root
     environment:
       - NETWORK_PORT=30305
@@ -21,12 +21,12 @@ services:
     ports:
       - 8545:8545
       - 30305:30305
-    entrypoint: [ "sh", "-c", "/root/bsc-rpc.sh" ]  
+    entrypoint: [ "sh", "-c", "/root/rva-rpc.sh" ]  
     # network_mode: "host"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:30305"]
       interval: 30s
       retries: 5
     networks:
-      - bsc_network
+      - rva_network
 

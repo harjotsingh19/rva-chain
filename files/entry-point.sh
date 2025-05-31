@@ -1,10 +1,10 @@
 #!/bin/bash
 
 workspace="/root"
-DATA_DIR="/root/bsc-node"
+DATA_DIR="/root/rva-node"
 # HTTP_PORT=8545
 # NETWORK_PORT=30305
-NODE_ID="bsc-node"
+NODE_ID="rva-node"
 
 echo "cat"
 cat ${workspace}/${NODE_ID}/address

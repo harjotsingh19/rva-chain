@@ -5,3 +5,7 @@ nodes-backup
 bsc-genesis-contract
 
 nodes-accounts
+
+files/genesis.json
+
+nodes-copy

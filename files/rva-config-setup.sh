@@ -1,6 +1,6 @@
 #!/bin/bash
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 # node_type=bsc-rpc
 # node_id=bsc-rpc
@@ -18,7 +18,7 @@ for i in $(seq 1 $NUM_NODES)
 do
     echo "node $i"
  
-    NODE_ID="bsc-node$i"
+    NODE_ID="rva-node$i"
 
     echo
     echo "COPYING CONFIG FILE"

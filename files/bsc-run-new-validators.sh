@@ -1,6 +1,6 @@
 #!/bin/bash
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 output_file=${workspace}/files/docker-compose-new-validators.yml
 
@@ -20,10 +20,10 @@ cat <<EOF > $output_file
 version: '3.8'
 
 networks:
-  bsc_network:
-    name: bsc-network
+  rva_network:
+    name: rva-network
 # networks:
-#   bsc_network:
+#   rva_network:
 #     driver: bridge
 
 services:
@@ -45,7 +45,7 @@ do
   cp -r $workspace/nodes-backup/bsc-node${i} $workspace/nodes/bsc-node${i}
 
 
-  cp $HOME/RVA/bsc-chain/files/config.toml ${workspace}/nodes/bsc-node${i}/config.toml
+  cp $HOME/rva-chain/files/config.toml ${workspace}/nodes/bsc-node${i}/config.toml
 
   # Check if the node is already initialized
   if [ -f "${workspace}/nodes/${NODE_ID}/geth/chaindata/LOCK" ]; then
@@ -83,7 +83,7 @@ do
       - "$((30305 + $i)):$((30305 + $i))"
     entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
     networks:
-      - bsc_network
+      - rva_network
 EOF
 
   # Add a newline for separation
@@ -93,7 +93,7 @@ done
 echo "Docker Compose file generated at $output_file."
 
 # Copy config.toml to the appropriate node directory
-# cp $HOME/RVA/bsc-chain/files/config.toml ${workspace}/nodes/bsc-node{8,9,10}/config.toml
+# cp $HOME/rva-chain/files/config.toml ${workspace}/nodes/bsc-node{8,9,10}/config.toml
 
 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-workspace="$HOME/RVA/bsc-chain"
+workspace="$HOME/rva-chain"
 enodes_array=()
 
 # Define the number of nodes
@@ -12,7 +12,7 @@ echo "NUM_NODES: $NUM_NODES"
 
 
 # Read the bootnode key and generate its enode
-BOOT_NODEKEY_PATH="$workspace/nodes/bsc-rpc/geth/nodekey"
+BOOT_NODEKEY_PATH="$workspace/nodes/rva-rpc/geth/nodekey"
 if [[ ! -f "$BOOT_NODEKEY_PATH" ]]; then
     echo "Boot node key file not found!"
     exit 1
@@ -26,13 +26,11 @@ if [[ -z "$BOOT_NODE_ENODE" ]]; then
     exit 1
 fi
 
-BOOT_NODE_ENTRY="\"enode://$BOOT_NODE_ENODE@35.176.80.51:30305\""
-
-echo "BOOT_NODE_ENTRY :- $BOOT_NODE_ENTRY"
+BOOT_NODE_ENTRY="\"enode://$BOOT_NODE_ENODE@192.168.29.242:30305\""
 
 # Loop through node identifiers and create/start each node
 for i in $(seq 1 $NUM_NODES); do
-    NODE_ID="bsc-node${i}"
+    NODE_ID="rva-node${i}"
     DATA_DIR="$workspace/nodes-copy/$NODE_ID"
 
     # Check if the nodekey exists
@@ -52,7 +50,7 @@ for i in $(seq 1 $NUM_NODES); do
     # Check if the enode was successfully fetched
     if [[ -n "$ENODE" ]]; then
         PORT=$((30305 + i))
-        ENODE_REPLACED="\"enode://$ENODE@35.176.80.51:$PORT\""
+        ENODE_REPLACED="\"enode://$ENODE@rva-node${i}:$PORT\""
         enodes_array+=("$ENODE_REPLACED")
     else
         echo "Failed to extract enode ID for $NODE_ID."
@@ -67,7 +65,7 @@ echo "$enodes_string"
 
 # Loop through nodes to update config files
 for i in $(seq 1 $NUM_NODES); do
-    NODE_ID="bsc-node${i}"
+    NODE_ID="rva-node${i}"
     DATA_DIR="$workspace/nodes-copy/$NODE_ID"
     CONFIG_FILE="./config.toml"
 

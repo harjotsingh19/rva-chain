@@ -32,9 +32,13 @@ npm install
 
 
 # curl -L https://foundry.paradigm.xyz | bash
-# echo 'export PATH="$HOME/.foundry/bin:$PATH"' >> $HOME/.profile
-source $HOME/.profile
+
 curl -L https://foundry.paradigm.xyz | bash
+
+echo 'export PATH="$HOME/.foundry/bin:$PATH"' >> $HOME/.profile
+
+source $HOME/.profile
+
 foundryup
 # forge install --no-git --no-commit foundry-rs/forge-std@v1.7.3
 
@@ -50,24 +54,24 @@ nvm install  12.18.3 && nvm use 12.18.3
 
 rm -rf ./out
 
-cat ./out
+cat ./out || true
 
 
-cp $HOME/rva-chain/genesis-nodes-files/validators.js $HOME/rva-chain/genesis-nodes-files/init_holders.js $HOME/rva-chain/genesis-nodes-files/generate.py $HOME/rva-chain/genesis-nodes-files/generate-genesis.js $HOME/rva-chain/bsc-genesis-contract/script
+cp $HOME/rva-chain/genesis-nodes-files/validators.js $HOME/rva-chain/genesis-nodes-files/init_holders.js $HOME/rva-chain/genesis-nodes-files/generate.py $HOME/rva-chain/genesis-nodes-files/generate-genesis.js $HOME/rva-chain/bsc-genesis-contract/scripts
 
-cp $HOME/rva-chain/genesis-nodes-files/package.json $HOME/rva-chain/genesis-nodes-files/bsc-genesis-contract/package.json
+cp $HOME/rva-chain/genesis-nodes-files/package.json $HOME/rva-chain/bsc-genesis-contract/package.json
 
 cp $HOME/rva-chain/genesis-nodes-files/BSCValidatorSet.sol $HOME/rva-chain/bsc-genesis-contract/contracts/BSCValidatorSet.sol
 # code .
-exit
-
-# forge test
 
 
-# bash scripts/flatten.sh
 
-# forge build
+forge test || true
 
+
+bash scripts/flatten.sh || true
+
+forge build || true
 echo
 
 nvm install v21
@@ -78,14 +82,16 @@ npm run generate:dev
 
 echo
 
-code .
+# code .
 
 
-rm -rf $HOME/rva-chain/genesis/genesis.json
+rm -rf $HOME/rva-chain/files/genesis.json
 
-cat $HOME/rva-chain/genesis/genesis.json
+cat $HOME/rva-chain/files/genesis.json || true
 
 cp $HOME/rva-chain/bsc-genesis-contract/genesis.json $HOME/rva-chain/files/genesis.json
+
+exit
 
 # cat $HOME/rva-chain/files/genesis.json
 

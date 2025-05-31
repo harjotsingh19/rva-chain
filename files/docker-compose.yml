@@ -1,18 +1,18 @@
 version: '3.8'
 
 networks:
-  bsc_network:
-    name: bsc-network
+  rva_network:
+    name: rva-network
 # networks:
-#   bsc_network:
+#   rva_network:
 #     driver: bridge
 
 services:
   node1:
     image: hs60/bsc-chain:latest
-    container_name: bsc-node1
+    container_name: rva-node1
     volumes:
-      - /home/harjot/RVA/bsc-chain/nodes/bsc-node1:/root/bsc-node
+      - /home/developer/rva-chain/nodes/rva-node1:/root/rva-node
       - ./entry-point.sh:/root/entry-point.sh
     working_dir: /root
     environment:
@@ -28,13 +28,13 @@ services:
       interval: 30s
       retries: 5
     networks:
-      - bsc_network
+      - rva_network
 
   node2:
     image: hs60/bsc-chain:latest
-    container_name: bsc-node2
+    container_name: rva-node2
     volumes:
-      - /home/harjot/RVA/bsc-chain/nodes/bsc-node2:/root/bsc-node
+      - /home/developer/rva-chain/nodes/rva-node2:/root/rva-node
       - ./entry-point.sh:/root/entry-point.sh
     working_dir: /root
     environment:
@@ -50,13 +50,13 @@ services:
       interval: 30s
       retries: 5
     networks:
-      - bsc_network
+      - rva_network
 
   node3:
     image: hs60/bsc-chain:latest
-    container_name: bsc-node3
+    container_name: rva-node3
     volumes:
-      - /home/harjot/RVA/bsc-chain/nodes/bsc-node3:/root/bsc-node
+      - /home/developer/rva-chain/nodes/rva-node3:/root/rva-node
       - ./entry-point.sh:/root/entry-point.sh
     working_dir: /root
     environment:
@@ -72,13 +72,13 @@ services:
       interval: 30s
       retries: 5
     networks:
-      - bsc_network
+      - rva_network
 
   node4:
     image: hs60/bsc-chain:latest
-    container_name: bsc-node4
+    container_name: rva-node4
     volumes:
-      - /home/harjot/RVA/bsc-chain/nodes/bsc-node4:/root/bsc-node
+      - /home/developer/rva-chain/nodes/rva-node4:/root/rva-node
       - ./entry-point.sh:/root/entry-point.sh
     working_dir: /root
     environment:
@@ -94,13 +94,13 @@ services:
       interval: 30s
       retries: 5
     networks:
-      - bsc_network
+      - rva_network
 
   node5:
     image: hs60/bsc-chain:latest
-    container_name: bsc-node5
+    container_name: rva-node5
     volumes:
-      - /home/harjot/RVA/bsc-chain/nodes/bsc-node5:/root/bsc-node
+      - /home/developer/rva-chain/nodes/rva-node5:/root/rva-node
       - ./entry-point.sh:/root/entry-point.sh
     working_dir: /root
     environment:
@@ -116,49 +116,5 @@ services:
       interval: 30s
       retries: 5
     networks:
-      - bsc_network
-
-  node6:
-    image: hs60/bsc-chain:latest
-    container_name: bsc-node6
-    volumes:
-      - /home/harjot/RVA/bsc-chain/nodes/bsc-node6:/root/bsc-node
-      - ./entry-point.sh:/root/entry-point.sh
-    working_dir: /root
-    environment:
-      - NETWORK_PORT=30311
-      - HTTP_PORT=8551
-    ports:
-      - "8551:8551"
-      - "30311:30311"
-    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
-    # network_mode: "host"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:30311"]
-      interval: 30s
-      retries: 5
-    networks:
-      - bsc_network
-
-  node7:
-    image: hs60/bsc-chain:latest
-    container_name: bsc-node7
-    volumes:
-      - /home/harjot/RVA/bsc-chain/nodes/bsc-node7:/root/bsc-node
-      - ./entry-point.sh:/root/entry-point.sh
-    working_dir: /root
-    environment:
-      - NETWORK_PORT=30312
-      - HTTP_PORT=8552
-    ports:
-      - "8552:8552"
-      - "30312:30312"
-    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
-    # network_mode: "host"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:30312"]
-      interval: 30s
-      retries: 5
-    networks:
-      - bsc_network
+      - rva_network
 

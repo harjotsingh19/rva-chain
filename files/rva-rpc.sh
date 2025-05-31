@@ -2,7 +2,7 @@
 
 set -x
 
-DATA_DIR=/root/bsc-rpc
+DATA_DIR=/root/rva-rpc
 
 ls $DATA_DIR/keystore
 

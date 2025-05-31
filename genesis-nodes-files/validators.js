@@ -4,47 +4,47 @@ const RLP = require('rlp');
 // Configure
 const validators = [
     {
-        consensusAddr: '0x312aD89dE1EAaa6BD18Cfa28970F4725458a9f60',
-        feeAddr: '0x312aD89dE1EAaa6BD18Cfa28970F4725458a9f60',
-        bscFeeAddr: '0x312aD89dE1EAaa6BD18Cfa28970F4725458a9f60',
+        consensusAddr: '0x06BF7e181E645ad8E1736F95399e692f112F9f97',
+        feeAddr: '0x06BF7e181E645ad8E1736F95399e692f112F9f97',
+        bscFeeAddr: '0x06BF7e181E645ad8E1736F95399e692f112F9f97',
         votingPower: 0x0000000000000064,
     },
     {
-        consensusAddr: '0x80067B7391b756C4e220bde464dfc3DE8F238008',
-        feeAddr: '0x80067B7391b756C4e220bde464dfc3DE8F238008',
-        bscFeeAddr: '0x80067B7391b756C4e220bde464dfc3DE8F238008',
+        consensusAddr: '0x897CD29bf328349AEf7caC590bC8B71A06B2b038',
+        feeAddr: '0x897CD29bf328349AEf7caC590bC8B71A06B2b038',
+        bscFeeAddr: '0x897CD29bf328349AEf7caC590bC8B71A06B2b038',
         votingPower: 0x0000000000000064,
     },
     {
-        consensusAddr: '0xa87B3D391e56D802D9Ab91B047cd2F02A42b1796',
-        feeAddr: '0xa87B3D391e56D802D9Ab91B047cd2F02A42b1796',
-        bscFeeAddr: '0xa87B3D391e56D802D9Ab91B047cd2F02A42b1796',
+        consensusAddr: '0x778996ed4282DF571F639dF0dAcc76377d02643d',
+        feeAddr: '0x778996ed4282DF571F639dF0dAcc76377d02643d',
+        bscFeeAddr: '0x778996ed4282DF571F639dF0dAcc76377d02643d',
         votingPower: 0x0000000000000064,
     },
     {
-        consensusAddr: '0x258a32bcbc04c13939e16d33fff2e0Ac7236b004',
-        feeAddr: '0x258a32bcbc04c13939e16d33fff2e0Ac7236b004',
-        bscFeeAddr: '0x258a32bcbc04c13939e16d33fff2e0Ac7236b004',
+        consensusAddr: '0xD8AF89BE2864d1E424F670dF5243F863aDB78672',
+        feeAddr: '0xD8AF89BE2864d1E424F670dF5243F863aDB78672',
+        bscFeeAddr: '0xD8AF89BE2864d1E424F670dF5243F863aDB78672',
         votingPower: 0x0000000000000064,
     },
     {
-        consensusAddr: '0xb2d2823e9f4A7281d9913d6205e67008D4DC0ec6',
-        feeAddr: '0xb2d2823e9f4A7281d9913d6205e67008D4DC0ec6',
-        bscFeeAddr: '0xb2d2823e9f4A7281d9913d6205e67008D4DC0ec6',
+        consensusAddr: '0xD00C37B8c20c370391133A5DbDE9ed4c6562A20a',
+        feeAddr: '0xD00C37B8c20c370391133A5DbDE9ed4c6562A20a',
+        bscFeeAddr: '0xD00C37B8c20c370391133A5DbDE9ed4c6562A20a',
         votingPower: 0x0000000000000064,
     }
 ];
 
 const bLSPublicKeys = [
-    '0x80c049cfb136dc523817e6a456ba9519b6d0c2b26b54c14b3b8d9ed75f22eeba5999c837a7319ca3be6dec1a56e7fc69',
+    '0xa6f581b6db3341da22bb4d8abbb76a015443ebb8b7e97ebc0b127609e8986154a6678436b7d3fe3afa4f9c87691b9573',
     
-    '0xb2416f74b2dc59c606c8da0e6fc21f4455726fe690a1b73f2a1850678bdc2e663d4c3e3bfe3bcaaaecd250fb4904a63b',
+    '0x90e0587b23ef34801b9f921954c49a6cba982725bb4c3396397191dd898d139ac682035e19f62f17b05ec040ce8fce35',
     
-    '0x893b460e43583eb42259ac6e05269d232c5ac9ef89c5a5e51f585b8e57eea6e2badc8ed9b64cea403727b827b08b9dbc',
+    '0x8679d0046e59e4b5f9fdb43c2338a992930921cb79219dcd1f162236a6365578d11eba93ec30c74f319c824e3650de35',
     
-    '0x8861a0247f7a1ab29f46a5ad0afafdc92875c29bfac304a974f10091ac3f677c2e69f42f2815ad546ebee704e7b78b0d',
+    '0xadd7dfcb98decdad01cd02d2473325e9bcf1b2399b550db811f4fda8368aa6adc02247129ea7493ce87a14c91f2e5d88',
     
-    '0xa5a7b0553fc3df0fb0b9c315ffd7da17acdd9fcb87fd0129bf777c5964d0c7c71f48ba04e202b3d9126d0e61d7e868df',
+    '0x894f15e7d545fc7d6e6c76b351284d3fa08521defe96bb1528dfc3c0ba2feb30c37caf4dd8a30326681e935a22df6b86',
     
 ];
 

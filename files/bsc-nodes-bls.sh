@@ -1,6 +1,6 @@
 #!/bin/bash
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 # Number of nodes to create (set to 5)
 NUM_NODES=5

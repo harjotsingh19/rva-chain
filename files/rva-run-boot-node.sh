@@ -1,18 +1,14 @@
 #!/bin/bash
 
-workspace=$HOME/RVA/bsc-chain
+set -euo pipefail
+trap 'echo "❌ Script failed on line $LINENO. Press any key to exit..."; read' ERR
+
+workspace=$HOME/rva-chain
 output_file=${workspace}/files/docker-compose-boot-node.yml
 
 
 
 docker-compose -f $workspace/files/docker-compose-boot-node.yml down
-
-# sudo rm -rf $workspace/nodes/bsc-rpc
-
-
-
-
-# cp -r $workspace/nodes-copy $workspace/nodes
 
 
 # Number of nodes to create
@@ -23,10 +19,10 @@ cat <<EOF > $output_file
 version: '3.8'
 
 networks:
-  bsc_network:
-    name: bsc-network
+  rva_network:
+    name: rva-network
 # networks:
-#   bsc_network:
+#   rva_network:
 #     driver: bridge
 
 services:
@@ -39,10 +35,10 @@ do
 
 
 
-  DATA_DIR="/root/bsc-rpc"
+  DATA_DIR="/root/rva-rpc"
   HTTP_PORT=8545
   NETWORK_PORT=30305
-  NODE_ID="bsc-rpc"
+  NODE_ID="rva-rpc"
 
   echo $((8545 + $i)) $((30305 + $i))
 
@@ -81,39 +77,16 @@ cp ${workspace}/files/boot.key ${workspace}/nodes/${NODE_ID}/geth/nodekey
 PORT1=$((8545 + i))
 PORT2=$((30305 + i))
 
-# # Function to check if a port is in use
-# is_port_in_use() {
-#     sudo lsof -i :$1 >/dev/null 2>&1
-#     return $?
-# }
-
-# # Kill port only if it's in use
-# if is_port_in_use $PORT1; then
-#     # Check if Docker process is using the port and kill it manually
-#     sudo lsof -ti :$PORT1 | xargs sudo kill -9
-#     echo "Killed process on port $PORT1"
-# else
-#     echo "Port $PORT1 is not in use, skipping..."
-# fi
-
-# if is_port_in_use $PORT2; then
-#     # Check if Docker process is using the port and kill it manually
-#     sudo lsof -ti :$PORT22| xargs sudo kill -9
-#     echo "Killed process on port $PORT1"
-# else
-#     echo "Port $PORT2 is not in use, skipping..."
-# fi
-
 
 set +x
 
     cat <<EOF >> $output_file
-  bsc-rpc:
+  rva-rpc:
     image: hs60/bsc-chain:latest
-    container_name: bsc-rpc
+    container_name: rva-rpc
     volumes:
       - ${workspace}/nodes/${NODE_ID}:${DATA_DIR}
-      - ./bsc-rpc.sh:/root/bsc-rpc.sh
+      - ./rva-rpc.sh:/root/rva-rpc.sh
     working_dir: /root
     environment:
       - NETWORK_PORT=30305
@@ -121,14 +94,14 @@ set +x
     ports:
       - 8545:8545
       - 30305:30305
-    entrypoint: [ "sh", "-c", "/root/bsc-rpc.sh" ]  
+    entrypoint: [ "sh", "-c", "/root/rva-rpc.sh" ]  
     # network_mode: "host"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:30305"]
       interval: 30s
       retries: 5
     networks:
-      - bsc_network
+      - rva_network
 EOF
 
     # Add a newline for separation
@@ -142,7 +115,7 @@ echo "Docker Compose file generated at $output_file."
 
 
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 
 
@@ -156,11 +129,11 @@ exit
 
 
 
-docker exec -it bsc-rpc1 /bin/bash
+docker exec -it rva-rpc1 /bin/bash
 
-cat /root/bsc-rpc/config.toml
+cat /root/rva-rpc/config.toml
 
-./geth attach /root/bsc-rpc/geth.ipc 
+./geth attach /root/rva-rpc/geth.ipc 
 
 admin.peers
 
@@ -172,11 +145,11 @@ echo
 
 
 
-docker exec -it bsc-rpc2 /bin/bash
+docker exec -it rva-rpc2 /bin/bash
 
-cat /root/bsc-rpc/config.toml
+cat /root/rva-rpc/config.toml
 
-./geth attach /root/bsc-rpc/geth.ipc 
+./geth attach /root/rva-rpc/geth.ipc 
 
 
 admin.peers
@@ -190,13 +163,13 @@ admin.addPeer("enode://6bf80f6f57fca9e15553a8bbb8588952d17e520f8c3fece63b15162f2
 
 
 
-docker restart bsc-rpc2
+docker restart rva-rpc2
 
-docker restart bsc-rpc1
+docker restart rva-rpc1
 
 
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 docker-compose -f $workspace/files/docker-compose-boot-node.yml down
 

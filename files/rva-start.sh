@@ -1,28 +1,31 @@
 
+set -euo pipefail
+trap 'echo "❌ Script failed on line $LINENO. Press any key to exit..."; read' ERR
 
-cd $HOME/RVA/bsc-chain/files
+
+cd $HOME/rva-chain/files
 
 
 ## start from scratch
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
-cd $HOME/RVA/bsc-chain/files
+cd $HOME/rva-chain/files
 
-docker-compose -f $workspace/files/docker-compose.yml down -v
+docker-compose -f $workspace/files/docker-compose.yml down -v || true
 
-docker-compose -f $workspace/files/docker-compose-new-validators.yml down -v
+docker-compose -f $workspace/files/docker-compose-new-validators.yml down -v || true
 
-docker-compose -f $workspace/files/docker-compose-boot-node.yml down -v
- 
+docker-compose -f $workspace/files/docker-compose-boot-node.yml down -v || true
+  
 # docker-compose -f $workspace/files/docker-compose-full-node.yml down -v
 
 # sudo rm -rf $workspace/nodes $workspace/nodes-compare
-sudo rm -rf $workspace/nodes $workspace/nodes-copy
+sudo rm -rf $workspace/nodes $workspace/nodes-copy || true
 
-cp -r $workspace/nodes-backup $workspace/nodes
+cp -r $workspace/nodes-backup $workspace/nodes || true
 
-file_path="$workspace/nodes/bsc-node1/address"
+file_path="$workspace/nodes/rva-node1/address"
 
 # Check if the file exists
 if [ ! -f "$file_path" ]; then
@@ -38,10 +41,10 @@ fi
 # cp -r $workspace/nodes-compare $workspace/nodes
 
 
-num=7
+num=5
 
 
-./bsc-run-boot-node.sh 1
+./rva-run-boot-node.sh 1
 
 
 # docker-compose -f $workspace/files/docker-compose-boot-node.yml down
@@ -50,12 +53,12 @@ num=7
 
 echo
 
-./bsc-run-nodes.sh $num
+./rva-setup-nodes.sh $num
 
 
 
 
-./bsc-config-setup.sh $num
+./rva-config-setup.sh $num
 
 
 sudo rsync -a "$workspace/nodes/" "$workspace/nodes-copy/"
@@ -65,14 +68,14 @@ sudo rsync -a "$workspace/nodes/" "$workspace/nodes-copy/"
 # cp -r $workspace/nodes $workspace/nodes-compare
 
 
-./bsc-fetch-keys.sh $num
+./rva-fetch-keys.sh $num
 
-./bsc-fetch-key2.sh $num
+./rva-fetch-key2.sh $num
 
 echo
 
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 # docker-compose -f $workspace/files/docker-compose.yml down -v
 
@@ -81,6 +84,8 @@ workspace=$HOME/RVA/bsc-chain
 # docker-compose -f $workspace/files/docker-compose-new-validator2.yml down -v
 
 docker-compose -f $workspace/files/docker-compose.yml up -d
+
+exit
 
 echo
 
@@ -189,7 +194,7 @@ docker restart bsc-node1
 
 
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 docker-compose -f $workspace/files/docker-compose.yml down
 
@@ -231,7 +236,7 @@ docker-compose -f $workspace/files/docker-compose-new-validator2.yml down -v
 docker-compose -f $workspace/files/docker-compose-boot-node.yml down
 
 
-workspace=$HOME/RVA/bsc-chain
+workspace=$HOME/rva-chain
 
 cd $workspace/files
 

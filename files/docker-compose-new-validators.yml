@@ -1,10 +1,10 @@
 version: '3.8'
 
 networks:
-  bsc_network:
-    name: bsc-network
+  rva_network:
+    name: rva-network
 # networks:
-#   bsc_network:
+#   rva_network:
 #     driver: bridge
 
 services:
@@ -25,7 +25,7 @@ services:
       - "30313:30313"
     entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
     networks:
-      - bsc_network
+      - rva_network
 
   node9:
     image: hs60/bsc-chain:latest
@@ -44,7 +44,7 @@ services:
       - "30314:30314"
     entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
     networks:
-      - bsc_network
+      - rva_network
 
   node10:
     image: hs60/bsc-chain:latest
@@ -63,7 +63,7 @@ services:
       - "30315:30315"
     entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
     networks:
-      - bsc_network
+      - rva_network
 
   node11:
     image: hs60/bsc-chain:latest
@@ -82,5 +82,5 @@ services:
       - "30316:30316"
     entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
     networks:
-      - bsc_network
+      - rva_network
 
