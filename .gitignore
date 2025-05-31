@@ -9,3 +9,5 @@ nodes-accounts
 files/genesis.json
 
 nodes-copy
+
+new-validator

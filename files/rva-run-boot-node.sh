@@ -8,7 +8,7 @@ output_file=${workspace}/files/docker-compose-boot-node.yml
 
 
 
-docker-compose -f $workspace/files/docker-compose-boot-node.yml down
+docker-compose -f $workspace/files/docker-compose-boot-node.yml down || true
 
 
 # Number of nodes to create
@@ -119,7 +119,7 @@ workspace=$HOME/rva-chain
 
 
 
-docker-compose -f $workspace/files/docker-compose-boot-node.yml down
+docker-compose -f $workspace/files/docker-compose-boot-node.yml down || true
 
 docker-compose -f $workspace/files/docker-compose-boot-node.yml up -d
 

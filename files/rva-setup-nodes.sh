@@ -131,7 +131,7 @@ workspace=$HOME/rva-chain
 
 
 exit
-docker-compose -f $workspace/files/docker-compose.yml down
+docker-compose -f $workspace/files/docker-compose.yml down || true
 
 docker-compose -f $workspace/files/docker-compose.yml up -d
 

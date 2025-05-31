@@ -68,7 +68,17 @@ This script will create bsc chain original bsc-genesis-contract repo to be edite
 
 	`echo $NODE_ENODE`
 
+- Place the enode entries of nodes in each node config.toml file in each node directory
+
+
+- create config toml
+	`$workspace/rva-config-setup.sh  $NUM_NODES`
+
+
+	`$workspace/rva-fetch-keys.sh  $NUM_NODES`
+
+	`$workspace/rva-fetch-key2.sh  $NUM_NODES`
 
 - Now place the boot node enode and other validator nodes endode enteries in BootstrapNodes = [] and StaticNodes = [] in each node directory in directory `$HOME/RVA/bsc-chain/nodes`
 - Run the bodes using :-
-`docker-compose  -f  $workspace/files/docker-compose.yml up -d`
+`docker-compose -f $workspace/docker-compose.yml up -d`

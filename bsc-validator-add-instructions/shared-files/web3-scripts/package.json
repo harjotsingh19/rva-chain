@@ -1,0 +1,21 @@
+{
+  "name": "web3-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@chainsafe/bls": "^8.1.0",
+    "@noble/bls12-381": "^1.4.0",
+    "bls-signatures": "^2.0.3",
+    "bls-wasm": "^1.4.0",
+    "blst": "^0.1.6",
+    "bn.js": "^5.2.1",
+    "ethers": "^6.13.5",
+    "web3": "^4.16.0"
+  }
+}
