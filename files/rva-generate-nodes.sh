@@ -1,15 +1,19 @@
 #!/bin/bash
 
+set -euo pipefail
+trap 'echo "❌ Script failed on line $LINENO. Press any key to exit..."; read' ERR
+
+
 # Set workspace directory
 workspace=$HOME/rva-chain
 validators=$1
 
 # Number of nodes to create
 NUM_NODES=$validators
-sudo rm -rf ${workspace}/nodes
-sudo rm -rf ${workspace}/nodes-backup
+sudo rm -rf ${workspace}/nodes || true
+sudo rm -rf ${workspace}/nodes-backup || true
 
-rm -rf ${workspace}/nodes-accounts
+rm -rf ${workspace}/nodes-accounts || true
 mkdir -p ${workspace}/nodes-accounts
 
 validators_array="const web3 = require('web3');\nconst RLP = require('rlp');\n\n// Configure\nconst validators = ["
@@ -17,8 +21,8 @@ bLSPublicKeys="const bLSPublicKeys = ["
 init_holders="const init_holders = ["
 
 # Base balance value
-# BASE_BALANCE="20000000000000000000000000"
-BASE_BALANCE=$2
+BASE_BALANCE="20000000000000000000000000"
+# BASE_BALANCE=$2
 
 # Loop through node identifiers and create/start each node
 for i in $(seq 1 $NUM_NODES); do
@@ -47,7 +51,7 @@ for i in $(seq 1 $NUM_NODES); do
     validatorAddr=$(grep 'Public address of the key' ${workspace}/nodes/${NODE_ID}Info | awk '{print $6}')
 
     echo $validatorAddr  
-    echo "${validatorAddr},${validatorAddr},${validatorAddr},0x0000000010000000" >> ${workspace}/genesis/validators.conf
+    # echo "${validatorAddr},${validatorAddr},${validatorAddr},0x0000000010000000" >> ${workspace}/genesis/validators.conf
     echo ${validatorAddr} > ${workspace}/nodes/${NODE_ID}/address
 
     set -x
@@ -60,7 +64,7 @@ for i in $(seq 1 $NUM_NODES); do
 
     set +x
 
-    BLS_PASSWORD_FILE="${workspace}/nodes/${NODE_ID}/bls-password.txt"
+    BLS_PASSWORD_FILE="${workspace}/nodes/${NODE_ID}/blspassword.txt"
     echo $BLS_PASSWORD > $BLS_PASSWORD_FILE
 
     echo "BLS PASSWORD $BLS_PASSWORD_FILE"
@@ -68,13 +72,13 @@ for i in $(seq 1 $NUM_NODES); do
     ./geth bls account new --datadir ${workspace}/nodes/${NODE_ID} --blspassword $BLS_PASSWORD_FILE
 
     # Run the command and store the output in a file
-    ./geth bls account list --datadir ${workspace}/nodes/${NODE_ID} --blspassword ${workspace}/nodes/${NODE_ID}/bls-password.txt > ${workspace}/nodes/${NODE_ID}/vote_address.txt
+    ./geth bls account list --datadir ${workspace}/nodes/${NODE_ID} --blspassword ${workspace}/nodes/${NODE_ID}/blspassword.txt > ${workspace}/nodes/${NODE_ID}/voteaddress.txt
 
     # Debugging output (to check the full raw output file)
-    echo "Full output written to vote_address.txt"
+    echo "Full output written to voteaddress.txt"
 
     # Define the file path
-    file_path="${workspace}/nodes/${NODE_ID}/vote_address.txt"
+    file_path="${workspace}/nodes/${NODE_ID}/voteaddress.txt"
 
     # Use grep with a regular expression to extract the string starting with '0x'
     VOTE_ADDRESS=$(grep -oE '0x[a-fA-F0-9]+' "$file_path")
@@ -86,7 +90,7 @@ for i in $(seq 1 $NUM_NODES); do
         echo "No BLS public key found."
     fi
 
-    echo ${VOTE_ADDRESS} > ${workspace}/nodes/${NODE_ID}/vote_address.txt
+    echo ${VOTE_ADDRESS} > ${workspace}/nodes/${NODE_ID}/voteaddress.txt
     
     RVA_CHAIN_ID=2200
     OPERATOR_ADDRESS=$validatorAddr
@@ -157,7 +161,11 @@ validators_array="${validators_array%,}
 bLSPublicKeys="${bLSPublicKeys%,}
 ];"
 
-init_holders="${init_holders%,}
+init_holders="${init_holders%,},
+{
+        address: '0x06BF7e181E645ad8E1736F95399e692f112F9f97',
+        balance: BigInt('300000000000000000000000100').toString(16),
+    }
 ];"
 
 # Write the validators.js file
@@ -209,8 +217,18 @@ exports = module.exports = {
 };
 EOF
 
+# init_holders="${init_holders%,},
+#     {
+#         address: '0x06BF7e181E645ad8E1736F95399e692f112F9f97',
+#         balance: BigInt('30000000000000000000000100').toString(16),
+#     }
+# ];"
+
+
 # Write the init_holders.js file
 echo -e "$init_holders" > ${workspace}/genesis-nodes-files/init_holders.js
+
+echo -e "exports = module.exports = init_holders;" >> ${workspace}/genesis-nodes-files/init_holders.js
 
 set -x
 cp -r ${workspace}/nodes ${workspace}/nodes-backup

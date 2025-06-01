@@ -25,7 +25,7 @@ const stakeHubContract = new web3.eth.Contract(stakeHubContractABI, stakeHubCont
 
 // Example values for offset and limit
 const offset = 0;
-const limit = 5;
+const limit = 20;
 
 
 async function getValidators() {

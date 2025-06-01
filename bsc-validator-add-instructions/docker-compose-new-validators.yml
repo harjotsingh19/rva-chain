@@ -1,0 +1,29 @@
+version: '3.8'
+
+networks:
+  rva_network:
+    name: rva-network
+# networks:
+#   rva_network:
+#     driver: bridge
+
+services:
+  rva-new-node1:
+    image: hs60/bsc-chain:latest
+    container_name: rva-new-node1
+    volumes:
+      - /home/developer/rva-chain/new-validator/rva-new-node1:/root/rva-node
+      - ./entry-point-new-node.sh:/root/entry-point.sh
+      # - /home/harjot/RVA/bsc-chain/nodes/bsc-rva-new-node1/password.txt:/root/bsc-node/password.txt
+
+    working_dir: /root
+    environment:
+      - NETWORK_PORT=30313
+      - HTTP_PORT=8553
+    ports:
+      - "8553:8553"
+      - "30313:30313"
+    entrypoint: [ "sh", "-c", "/root/entry-point.sh" ]  
+    networks:
+      - rva_network
+

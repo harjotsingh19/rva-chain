@@ -1,22 +1,27 @@
 const init_holders = [
     {
+        address: '0x2B2da2E6c980D925326B813e913b1D896e514C27',
+        balance: BigInt('20000000000000000000000100').toString(16),
+    },
+    {
+        address: '0xCe9Ee94C94008a6e1d9c8586A813c9d949f0b446',
+        balance: BigInt('20000000000000000000000200').toString(16),
+    },
+    {
+        address: '0xb6e8fcf3c309644c94662e89e006959f3810e897',
+        balance: BigInt('20000000000000000000000300').toString(16),
+    },
+    {
+        address: '0x75D227249aB3E2c13995489eD4e371a4Cd447A92',
+        balance: BigInt('20000000000000000000000400').toString(16),
+    },
+    {
+        address: '0xac47287d043d51CF09bC03f50f267845fCb34e3C',
+        balance: BigInt('20000000000000000000000500').toString(16),
+    },
+{
         address: '0x06BF7e181E645ad8E1736F95399e692f112F9f97',
-        balance: BigInt('30000000000000000000000100').toString(16),
-    },
-    {
-        address: '0x897CD29bf328349AEf7caC590bC8B71A06B2b038',
-        balance: BigInt('30000000000000000000000200').toString(16),
-    },
-    {
-        address: '0x778996ed4282DF571F639dF0dAcc76377d02643d',
-        balance: BigInt('30000000000000000000000300').toString(16),
-    },
-    {
-        address: '0xD8AF89BE2864d1E424F670dF5243F863aDB78672',
-        balance: BigInt('30000000000000000000000400').toString(16),
-    },
-    {
-        address: '0xD00C37B8c20c370391133A5DbDE9ed4c6562A20a',
-        balance: BigInt('30000000000000000000000500').toString(16),
+        balance: BigInt('300000000000000000000000100').toString(16),
     }
 ];
+exports = module.exports = init_holders;

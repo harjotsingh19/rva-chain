@@ -62,6 +62,7 @@ cp $HOME/rva-chain/genesis-nodes-files/validators.js $HOME/rva-chain/genesis-nod
 cp $HOME/rva-chain/genesis-nodes-files/package.json $HOME/rva-chain/bsc-genesis-contract/package.json
 
 cp $HOME/rva-chain/genesis-nodes-files/BSCValidatorSet.sol $HOME/rva-chain/bsc-genesis-contract/contracts/BSCValidatorSet.sol
+
 # code .
 
 
@@ -90,6 +91,8 @@ rm -rf $HOME/rva-chain/files/genesis.json
 cat $HOME/rva-chain/files/genesis.json || true
 
 cp $HOME/rva-chain/bsc-genesis-contract/genesis.json $HOME/rva-chain/files/genesis.json
+
+echo "Genesis file generated at $HOME/rva-chain/files/genesis.json"
 
 exit
 

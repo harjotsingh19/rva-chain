@@ -6,7 +6,7 @@ const { ethers } = require("ethers");
 // Initialize Web3 provider
 const RPC_URL = "http://127.0.0.1:8545"; // Your RPC URL
 const CONTRACT_ADDRESS = "0x0000000000000000000000000000000000002002"; // Your contract address
-const ABI_PATH = "./abi/stakehub.abi"; // Update with correct ABI path
+const ABI_PATH = "/home/developer/rva-chain/files/abi/stakehub.abi"; // Update with correct ABI path
 
 // Load contract ABI
 const ABI = JSON.parse(fs.readFileSync(ABI_PATH, "utf-8"));
@@ -14,12 +14,12 @@ const ABI = JSON.parse(fs.readFileSync(ABI_PATH, "utf-8"));
 const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
 
 // PRIVATE KEY OF OLD VALIDATOR TO BE ADDED.
-const PRIVATE_KEY = "0xb886a23d90b126a94f8c532ecc873996ab5877287fba1c897d70be360c63c1b5";
+const PRIVATE_KEY = "0x0424c55826f64c547c24fd4f5ac33009ee6760afbef7f7b88e80cb603865c434";
 
 const account = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY);
 web3.eth.accounts.wallet.add(account);
 
-const voteAddress = "0xb5d569529d9e234484ce940ae508623344e74fa59c4e37da1811fc243a596f9e694aa05bddf554268e3aa2707efdc9b5"; // 
+const voteAddress = "0xb5a31129db8629e89b519fe41e363669f09648964633dea7b3d2b0439076650e71cde860e5c3be686e8e287a29658ac3"; // 
 
 //public address of old validator
 const consensusAddress = account.address;
@@ -29,9 +29,9 @@ console.log('Generated Consensus Address:', consensusAddress);
 
 
 // BLS PROOF GENERATED DURING CREATION OF OLD VALIDATOR BLS ACCOUNT.
-const blsProof = "0x88c484306deabf446a0b1db1be6b5457070df8c3e9082741e6c45ef2db1b1b0e3bb40d58f236ee44e6bb922a66b4b3ec170506ffcca6f11d0cf60917bc45d414f61dbc95470dfec434d11cf0df1633cabcf88912387331f8aaea0a78499edc91" 
+const blsProof = "0xa0e7e2dc45111d03fdc77610000f548faa66acb1d15d259f3feb2c71964615b5bd3e8ac8d754fc22b45290ae125b8e0119de241f9b8bc37d595fab57d055b7753aaa740c344321a3c46b4b7f304255a7a20c0669de6fc8c62e4c3653014cfae7" 
 
-const node_name="Node1"
+const node_name="NewNode1"
 
 
 
@@ -63,7 +63,7 @@ async function createValidator() {
     };
 
 
-    const stakeAmount = web3.utils.toWei("15000", "ether"); 
+    const stakeAmount = web3.utils.toWei("25000", "ether"); 
     
     
     try {
@@ -109,7 +109,7 @@ async function createValidator() {
         const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
 
         console.log("Validator Created! Transaction Hash:", receipt.transactionHash);
-        console.log("Validator Created! Transaction Hash:", receipt);
+        console.log("Validator Created! Transaction receipt:", receipt);
     } catch (error) {
         console.error(" Error creating validator:", error);
     }
