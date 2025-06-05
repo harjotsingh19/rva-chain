@@ -1,21 +1,25 @@
 
   
 
+  
+
 # BSC CHAIN VALIDATOR STAKING
 
   
+## Clone the repo for references to see structure of nodes directories and to access geth binary file
 
+`git clone https://harjot-debut@bitbucket.org/rva-blockchain/rva-chain.git`
   
 
   
 
-  
-
-  
+ 
 
   
 
 ## STEP 1- GENERATE BLS PROOF ACCOUNT FOR INITIAL VALIDATORS
+
+  
 
   
 
@@ -33,7 +37,11 @@
 
   
 
+  
+
 #### 1. Generation of normal public wallet account for validator
+
+  
 
   
 
@@ -47,7 +55,11 @@
 
   
 
+  
+
 - First, generate normal public address accounts for required number of validators in respective directories using commands :-
+
+  
 
   
 
@@ -73,7 +85,11 @@
 
   
 
+  
+
 `workspace=$HOME/rva-chain`
+
+  
 
   
 
@@ -97,7 +113,11 @@
 
   
 
+  
+
 `mkdir -p ${workspace}/nodes`
+
+  
 
   
 
@@ -125,6 +145,8 @@
 
   
 
+  
+
 `DATA_DIR=${workspace}/nodes/${NODE_ID}`
 
   
@@ -139,7 +161,11 @@
 
   
 
+  
+
 - Create new account for validator using command :-
+
+  
 
   
 
@@ -167,7 +193,11 @@
 
   
 
+  
+
 - Console the public address of new validator :-
+
+  
 
   
 
@@ -195,7 +225,11 @@
 
   
 
+  
+
 `echo $validatorAddr`
+
+  
 
   
 
@@ -221,7 +255,11 @@
 
   
 
+  
+
 #### 2. Generation of BLS PROOF account for validator
+
+  
 
   
 
@@ -245,7 +283,11 @@
 
   
 
+  
+
 `$workspace/geth bls account new --datadir ${DATA_DIR}`
+
+  
 
   
 
@@ -269,7 +311,11 @@ This command will ask for bls password , remember the password and save it in .t
 
   
 
+  
+
 where DATA_DIR is path where files of respective validator node are (inside where geth folder for node generated after initialization) .
+
+  
 
   
 
@@ -293,7 +339,11 @@ where DATA_DIR is path where files of respective validator node are (inside wher
 
   
 
+  
+
 - Now retrieve the **vote address** of each validator one by one using command :-
+
+  
 
   
 
@@ -317,7 +367,11 @@ where DATA_DIR is path where files of respective validator node are (inside wher
 
   
 
+  
+
 **NOTE:-**
+
+  
 
   
 
@@ -341,7 +395,11 @@ where DATA_DIR is path where files of respective validator node are (inside wher
 
   
 
+  
+
 - Now generate the **BLS PROOF** of each validator using command by providing below 3 parameters:-
+
+  
 
   
 
@@ -357,6 +415,8 @@ where DATA_DIR is path where files of respective validator node are (inside wher
 
   
 
+  
+
 `OPERATOR_ADDRESS=<Public address of validator>`
 
   
@@ -365,7 +425,11 @@ where DATA_DIR is path where files of respective validator node are (inside wher
 
   
 
+  
+
 `VOTE_ADDRESS= <Generated from above vote address command>`
+
+  
 
   
 
@@ -391,7 +455,11 @@ where DATA_DIR is path where files of respective validator node are (inside wher
 
   
 
+  
+
 `$workspace/geth bls account generate-proof --datadir ${DATA_DIR} --chain-id ${BSC_CHAIN_ID} ${OPERATOR_ADDRESS} ${VOTE_ADDRESS}`
+
+  
 
   
 
@@ -407,7 +475,11 @@ NOTE:-
 
   
 
+  
+
 > Write BLS password of new validator ina txt file **blspassword.txt** and save it in ${DATA_DIR} of validator to be used in stakehub validator addition.
+
+  
 
   
 
@@ -432,20 +504,20 @@ NOTE:-
   
 
   
-  
-  
 
   
 
   
-  
 
   
+
   
 
   
 
 ## STEP 2 - GENERATE BLS WALLET FOR NEW VALIDATORS
+
+  
 
   
 
@@ -455,7 +527,11 @@ NOTE:-
 
   
 
+  
+
 - Set the workspace directory path
+
+  
 
   
 
@@ -479,7 +555,11 @@ NOTE:-
 
   
 
+  
+
 - Create directory for new validator
+
+  
 
   
 
@@ -505,7 +585,11 @@ NOTE:-
 
   
 
-`NODE_ID="bsc-new-node1"`
+  
+
+`NODE_ID="rva-new-node1"`
+
+  
 
   
 
@@ -533,7 +617,11 @@ NOTE:-
 
   
 
+  
+
 - Create new account for validator using command :-
+
+  
 
   
 
@@ -561,7 +649,11 @@ NOTE:-
 
   
 
+  
+
 - Console the public address of new validator :-
+
+  
 
   
 
@@ -589,7 +681,11 @@ NOTE:-
 
   
 
+  
+
 `echo $validatorAddr`
+
+  
 
   
 
@@ -614,9 +710,12 @@ NOTE:-
   
 
   
+
   
 
 #### 2. Generation of BLS PROOF account for validator
+
+  
 
   
 
@@ -625,9 +724,12 @@ NOTE:-
   
 
   
+
   
 
 `$workspace/geth bls account new --datadir ${DATA_DIR}`
+
+  
 
   
 
@@ -641,9 +743,12 @@ NOTE:-
 
   
 
+  
+
 > This command will ask for bls password , remember the password and save it in blspassword.txt file.
 
   
+
   
 
 where DATA_DIR is path where geth folder will be generated during initialiazation with genesis file
@@ -658,7 +763,9 @@ where DATA_DIR is path where geth folder will be generated during initialiazatio
 
   
 
-> Refer to **bsc-new-node1** directory inside **new-validator** directory in **shared-files.zip** to see geth and bls folder structure.
+  
+
+> Refer to **rva-new-node1** directory inside **new-validator** directory in **shared-files.zip** to see geth and bls folder structure.
 
   
 
@@ -669,9 +776,12 @@ where DATA_DIR is path where geth folder will be generated during initialiazatio
   
 
   
+
   
 
 - Now retrieve the **vote address** of new validator using command :-
+
+  
 
   
 
@@ -687,7 +797,11 @@ where DATA_DIR is path where geth folder will be generated during initialiazatio
 
   
 
+  
+
 **NOTE:-**
+
+  
 
   
 
@@ -695,7 +809,11 @@ where DATA_DIR is path where geth folder will be generated during initialiazatio
 
   
 
+  
+
 - Now generate the **BLS PROOF** of each validator using command by providing below 3 parameters:-
+
+  
 
   
 
@@ -711,6 +829,8 @@ where DATA_DIR is path where geth folder will be generated during initialiazatio
 
   
 
+  
+
 `OPERATOR_ADDRESS=<Public address of validator>`
 
   
@@ -719,7 +839,11 @@ where DATA_DIR is path where geth folder will be generated during initialiazatio
 
   
 
+  
+
 `VOTE_ADDRESS= <Generated from above vote address command>`
+
+  
 
   
 
@@ -745,7 +869,11 @@ where DATA_DIR is path where geth folder will be generated during initialiazatio
 
   
 
+  
+
 `$workspace/geth bls account generate-proof --datadir ${DATA_DIR} --chain-id ${BSC_CHAIN_ID} ${OPERATOR_ADDRESS} ${VOTE_ADDRESS}`
+
+  
 
   
 
@@ -761,7 +889,11 @@ NOTE:-
 
   
 
-> Write BLS password of new validator ina txt file **blspassword.txt**and save it in ${DATA_DIR} of new validator to be used in stakehub validator addition.
+  
+
+> Write BLS password of new validator ina txt file **bls_proof.txt**and save it in ${DATA_DIR} of new validator to be used in stakehub validator addition.
+
+  
 
   
 
@@ -787,17 +919,27 @@ NOTE:-
 
   
 
+  
+
 ## STEP 3 - RUN NEW VALIDATOR
 
+  
+
 Run the new validator node with following steps :-
+
+  
 
   
 
 - Initialize the new validator account directory with **genesis.json** file.
 
   
+`workspace=$HOME/rva-chain`
+  
 
-`$workspace/geth --datadir ${workspace}/new-validator/${NODE_ID} init ${workspace}/genesis/genesis.json`
+`$workspace/geth --datadir ${workspace}/new-validator/${NODE_ID} init ${workspace}/files/genesis.json`
+
+  
 
   
 
@@ -824,32 +966,6 @@ Run the new validator node with following steps :-
   
 
   
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-- The command for running the new validator :-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-(Or add this command in docker volume file to run inside docker)
 
   
 
@@ -863,7 +979,22 @@ Run the new validator node with following steps :-
 
   
 
-`./geth --config ${DATA_DIR}/config.toml --datadir ${DATA_DIR} --syncmode snap --password /dev/null --blspassword ${DATA_DIR}/blspassword.txt --allow-insecure-unlock --cache 18000 --networkid 2200 --http --http.addr 0.0.0.0 --http.port ${HTTP_PORT} --nousb --port ${NETWORK_PORT} --http.corsdomain '*' --http.api web3,eth,debug,admin,personal,miner,net --ipcpath "${DATA_DIR}/geth.ipc" --verbosity 3 --light.serve 50 --pprof.addr 0.0.0.0 --pprof --monitor.doublesign --mine -unlock ${validatorAddr} --miner.etherbase ${validatorAddr} --vote --nodiscover`
+- Then edit `docker-compose-new-validators.yaml` 
+	edit path to new validator directory inside docker-compose file
+	and `entry-point-new-node.sh` inside cloned instruction repo according to need 
+
+  
+
+  - Run docker-compose
+`docker-compose -f $workspace/bsc-validator-add-instructions/docker-compose-new-validators.yml up -d`
+  
+
+  
+
+  
+
+  
+  
 
   
 
@@ -880,6 +1011,12 @@ Run the new validator node with following steps :-
 - Now validator will work as full node and will not start mining.
 
   
+
+## Fetch Private key 
+
+-Change the home directory and path to validator's keystore folder to fetch private key using web3-scripts's  directory inside cloned repo script using command :-
+
+`node fetch-private-key.js`   
 
   
 
@@ -905,7 +1042,11 @@ Run the new validator node with following steps :-
 
   
 
+  
+
 - Send amount of ethers (if required) to old validators account if required ( using **send-balance.js** inside web3-scripts directory inside shared zip file
+
+  
 
   
 
@@ -929,7 +1070,11 @@ Run the new validator node with following steps :-
 
   
 
+  
+
 **- Replace the the followings :-**
+
+  
 
   
 
@@ -953,7 +1098,11 @@ Run the new validator node with following steps :-
 
   
 
+  
+
 - set **stakeAmount** with desired stake . (minimum 2001 ethers) (STAKE AMOUNT WILL DECIDE VOTEPOWER)
+
+  
 
   
 
@@ -977,7 +1126,11 @@ Run the new validator node with following steps :-
 
   
 
+  
+
 -  **consensusAddress** with public address of old validator.
+
+  
 
   
 
@@ -993,7 +1146,11 @@ Run the new validator node with following steps :-
 
   
 
+  
+
 -  **node_name** with unique name of node with first letter in uupercase (e.g. Node1)
+
+  
 
   
 
@@ -1009,19 +1166,25 @@ Run the new validator node with following steps :-
 
   
 
+  
+
 NOTE:-
+
+  
 
   
 
 > PERFROM SAME STEPS AS ADDING OLD VALIDATOR TO STAKEHUB (createValidator method)
 
   
-  
+
   
 
   
 
 - Send amount of ethers to new validators account ( using **send-balance.js** inside web3-scripts directory inside shared zip file
+
+  
 
   
 
@@ -1045,7 +1208,11 @@ NOTE:-
 
   
 
+  
+
 **- Replace the the followings :-**
+
+  
 
   
 
@@ -1069,7 +1236,11 @@ NOTE:-
 
   
 
+  
+
 - set **stakeAmount** with desired stake . (minimum 2001 ethers) (STAKE AMOUNT WILL DECIDE VOTEPOWER)
+
+  
 
   
 
@@ -1093,7 +1264,11 @@ NOTE:-
 
   
 
+  
+
 -  **consensusAddress** with public address of old validator.
+
+  
 
   
 
@@ -1109,6 +1284,8 @@ NOTE:-
 
   
 
+  
+
 -  **node_name** with unique name of node with first letter in uupercase (e.g. NewVal1)
 
   
@@ -1118,6 +1295,7 @@ NOTE:-
   
 
   
+
   
 
   
@@ -1132,7 +1310,11 @@ NOTE:-
 
   
 
+  
+
 - Now we can check if staked old and new validators are added in stakehub contract or not using getValidators method of stakehub contract (refernce web3-scripts's **get-validators.js** file in shared zip file)
+
+  
 
   
 
@@ -1156,7 +1338,11 @@ NOTE:-
 
   
 
+  
+
 - validators {
+
+  
 
   
 
@@ -1180,7 +1366,11 @@ NOTE:-
 
   
 
+  
+
 '0xe79dcf016687fFeE780a18df4890408E0f1EaE06',
+
+  
 
   
 
@@ -1204,7 +1394,11 @@ NOTE:-
 
   
 
+  
+
 '0xdf0cDA5b7bF5bc0E967d10c25d36c87B52c88384',
+
+  
 
   
 
@@ -1228,7 +1422,11 @@ NOTE:-
 
   
 
+  
+
 ],
+
+  
 
   
 
@@ -1252,7 +1450,11 @@ NOTE:-
 
   
 
+  
+
 '0x4AFc633E7B6bEB8e552ccddbE06Cca3754991E9A',
+
+  
 
   
 
@@ -1276,7 +1478,11 @@ NOTE:-
 
   
 
+  
+
 '0x2804ADA1C219E50898e75B2Bd052030580f4fbAC',
+
+  
 
   
 
@@ -1300,7 +1506,11 @@ NOTE:-
 
   
 
+  
+
 ],
+
+  
 
   
 
@@ -1324,7 +1534,11 @@ NOTE:-
 
   
 
+  
+
 __length__: 3,
+
+  
 
   
 
@@ -1348,7 +1562,11 @@ operatorAddrs: [
 
   
 
+  
+
 '0xe79dcf016687fFeE780a18df4890408E0f1EaE06',
+
+  
 
   
 
@@ -1372,7 +1590,11 @@ operatorAddrs: [
 
   
 
+  
+
 '0xdf0cDA5b7bF5bc0E967d10c25d36c87B52c88384',
+
+  
 
   
 
@@ -1396,7 +1618,11 @@ operatorAddrs: [
 
   
 
+  
+
 ],
+
+  
 
   
 
@@ -1420,7 +1646,11 @@ creditAddrs: [
 
   
 
+  
+
 '0x4AFc633E7B6bEB8e552ccddbE06Cca3754991E9A',
+
+  
 
   
 
@@ -1444,7 +1674,11 @@ creditAddrs: [
 
   
 
+  
+
 '0x2804ADA1C219E50898e75B2Bd052030580f4fbAC',
+
+  
 
   
 
@@ -1468,7 +1702,11 @@ creditAddrs: [
 
   
 
+  
+
 ],
+
+  
 
   
 
@@ -1492,7 +1730,11 @@ totalLength: 4n
 
   
 
+  
+
 }
+
+  
 
   
 
@@ -1520,7 +1762,11 @@ totalLength: 4n
 
   
 
+  
+
 - After rotation got occur , check the new list of validators and mining validator through getValidators and getMiningValidators methods of BscValidatorSetContract contract of chain. (reference **get-mining-validators.js** script of web3-scripts directory inside shared zip file)
+
+  
 
   
 

@@ -11,3 +11,8 @@ files/genesis.json
 nodes-copy
 
 new-validator
+
+
+bsc-validator-add-instructions/shared-files/web3-scripts/node_modules
+
+rva-init-holder
